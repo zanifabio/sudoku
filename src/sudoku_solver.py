@@ -41,32 +41,23 @@ def pretty_print(matrix: List[List[int]]):
     print(to_print)
 
 
-# def first(matrix: List[List[int]]) -> Optional[Tuple[int, int]]:
-#     for row in range(9):
-#         for col in range(9):
-#             if matrix[row][col] == 0:
-#                 for i in range(1,10):
-#                     matrix[row][col] = i
-#                     if is_valid(matrix):
-#                         return row, col
-#     return
-#
-#
-# def next(matrix: List[List[int]], row: int, col: int):
-#     for i in range()
-
 def solve(matrix: List[List[int]]):
+	# if no solution is found, return false
     if not is_valid(matrix):
-        return
+        return False
+    # solve with backtracking
     for row in range(9):
         for col in range(9):
+        	# skips the numbers already filled in
             if matrix[row][col] != 0:
                 continue
+            # check all possibility and backtracks in case the solution is not valid down a tree
             for num in range(1, 10):
                 matrix[row][col] = num
                 solve(matrix)
                 matrix[row][col] = 0
             return
+    # if the matrix is complete and valid, then we have a solution, so we print it
     print("Result:")
     pretty_print(matrix)
 
@@ -85,5 +76,5 @@ if __name__ == '__main__':
     ]
     print("Input matrix:")
     pretty_print(input_matrix)
-    solve(input_matrix)
-    # print(f"Valid: {is_valid(input_matrix)}")
+    if not solve(input_matrix):
+        print("No solution found. The schema is not valid")
