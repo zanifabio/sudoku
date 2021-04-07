@@ -1,6 +1,4 @@
-import typing
-
-from typing import List
+from typing import List, Optional, Tuple
 
 
 def is_valid(matrix: List[List[int]]) -> bool:
@@ -43,18 +41,49 @@ def pretty_print(matrix: List[List[int]]):
     print(to_print)
 
 
+# def first(matrix: List[List[int]]) -> Optional[Tuple[int, int]]:
+#     for row in range(9):
+#         for col in range(9):
+#             if matrix[row][col] == 0:
+#                 for i in range(1,10):
+#                     matrix[row][col] = i
+#                     if is_valid(matrix):
+#                         return row, col
+#     return
+#
+#
+# def next(matrix: List[List[int]], row: int, col: int):
+#     for i in range()
+
+def solve(matrix: List[List[int]]):
+    if not is_valid(matrix):
+        return
+    for row in range(9):
+        for col in range(9):
+            if matrix[row][col] != 0:
+                continue
+            for num in range(1, 10):
+                matrix[row][col] = num
+                solve(matrix)
+                matrix[row][col] = 0
+            return
+    print("Result:")
+    pretty_print(matrix)
+
+
 if __name__ == '__main__':
     input_matrix = [
-        [1, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 2, 0, 0, 0, 0, 0, 0, 0],
-        [0, 4, 3, 0, 0, 0, 8, 0, 0],
-        [0, 0, 0, 4, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 5, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 6, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 7, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 8, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 9]
+        [9, 3, 0, 0, 1, 0, 0, 7, 2],
+        [6, 7, 0, 2, 0, 3, 0, 5, 4],
+        [8, 0, 0, 0, 0, 0, 0, 0, 3],
+        [0, 5, 0, 0, 0, 7, 0, 8, 0],
+        [3, 0, 0, 0, 4, 0, 0, 0, 1],
+        [0, 9, 0, 6, 0, 0, 0, 2, 0],
+        [5, 0, 0, 0, 0, 0, 0, 0, 8],
+        [2, 4, 0, 9, 0, 5, 0, 3, 7],
+        [7, 1, 0, 0, 3, 0, 0, 4, 6]
     ]
-    print(f"Input matrix:")
+    print("Input matrix:")
     pretty_print(input_matrix)
-    print(f"Valid: {is_valid(input_matrix)}")
+    solve(input_matrix)
+    # print(f"Valid: {is_valid(input_matrix)}")
