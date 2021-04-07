@@ -24,8 +24,13 @@ def is_valid(matrix: List[List[int]]) -> bool:
                     # check no equal number on the same column
                     if i != row and matrix[i][col] == matrix[row][col]:
                         return False
-                # TODO: check no equal number in the same block
-
+                # check no equal number in the same block
+                block_starting_row = int(row / 3) * 3
+                block_starting_col = int(col / 3) * 3
+                for i in range(block_starting_row, block_starting_row + 3):
+                    for j in range(block_starting_col, block_starting_col + 3):
+                        if i != row and j != col and matrix[i][j] == matrix[row][col]:
+                            return False
     return True
 
 
@@ -42,7 +47,7 @@ if __name__ == '__main__':
     input_matrix = [
         [1, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 2, 0, 0, 0, 0, 0, 0, 0],
-        [0, 1, 3, 0, 0, 0, 0, 0, 0],
+        [0, 4, 3, 0, 0, 0, 8, 0, 0],
         [0, 0, 0, 4, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 5, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 6, 0, 0, 0],
